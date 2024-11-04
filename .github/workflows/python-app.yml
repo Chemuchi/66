@@ -37,11 +37,11 @@ jobs:
      - name: Login to Docker Hub
        uses: docker/login-action@v2
        with:
-         username: ${{  secret.DOCKERHUB_USERNAME  }}
-         password: ${{  secret.DOCKERHUB_TOKEN  }}
+         username: ${{  secrets.DOCKERHUB_USERNAME  }}
+         password: ${{  secrets.DOCKERHUB_TOKEN  }}
 
      - name: Build and Push Docker image
-       run: docker build --platform linux/amd64 -t ${{  secret.DOCKERHUB_USERNAME  }}/66:latest . --push
+       run: docker build --platform linux/amd64 -t ${{  secrets.DOCKERHUB_USERNAME  }}/66:latest . --push
 
   kubernetes:
     runs-on: ubuntu-latest
@@ -56,12 +56,12 @@ jobs:
     - name: Setup Kubernetes
       run: |
         mkdir -p $HOME/.kube
-        echo "${{  secret.KUBE_CONFIG  }}" | base64 --decode > $HOME/.kube/config
+        echo "${{  secrets.KUBE_CONFIG  }}" | base64 --decode > $HOME/.kube/config
 
     - name: Deploy to Kubernetes
       run: |
         kubectl apply -f Deployment.yaml
-        kubectl set image deployment/66-deployment 66-container=ashhyeong/66:latest
+        kubectl set image deployment/66-deployment 66-container=${{  secrets.DOCKERHUB_USERNAME  }}/66:latest
 
     
       
