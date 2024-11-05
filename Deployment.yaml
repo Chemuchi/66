@@ -7,6 +7,7 @@ spec:
   selector:
     matchLabels:
       app: 66-app
+  revisionHistoryLimit: 1
   template:
     metadata:
       labels:
