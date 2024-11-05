@@ -22,3 +22,13 @@ async def root():
         "Expires": "0"
     }
     return JSONResponse(content=response_data, headers=headers, media_type="application/json; charset=utf-8")
+
+@app.get("/frombirae")
+async def from_birae():
+    result = next_birae_time()
+    return result
+
+@app.get("/frompanam")
+async def from_panam():
+    result = next_panam_time()
+    return result
