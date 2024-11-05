@@ -19,6 +19,9 @@ def find_next_time(time_list, current_time):
             return time_str
     return None
 
+def current_time_str():
+    return current_time.strftime("%H:%M")
+
 def find_previous_time(time_list, current_time):
     for time_str in reversed(time_list):
         time_obj = datetime.strptime(time_str, "%H:%M").time()
