@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
 
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from data.schedule import *
 from collections import OrderedDict
 app = FastAPI()
@@ -14,4 +14,9 @@ async def root():
         ("다음 판암역에서 출발시간", next_panam_time()),
         ("이전 판암역에서 출발시간", previous_panam_time())
     ])
-    return Response(content=response_data, media_type="application/json;charset=utf-8")
+
+    headers = {
+        "Cache-Control": "no-control",
+        "Pragma": "no-cache"
+    }
+    return JSONResponse(content=response_data, headers=headers);
