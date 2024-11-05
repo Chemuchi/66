@@ -17,7 +17,8 @@ async def root():
     ])
 
     headers = {
-        "Cache-Control": "no-control",
-        "Pragma": "no-cache"
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"
     }
-    return JSONResponse(content=response_data, headers=headers)
+    return JSONResponse(content=response_data, headers=headers, media_type="application/json; charset=utf-8")

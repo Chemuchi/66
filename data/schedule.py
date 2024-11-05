@@ -10,33 +10,40 @@ panam = ["05:50", "06:20", "06:51", "07:25", "07:55", "08:25", "08:59", "09:33",
          "16:10", "16:46", "17:20", "17:54", "18:28", "19:04", "19:39", "20:14", "20:48",
          "21:22", "21:56", "22:30"]
 
-current_time = datetime.now().time()
+"""def current_time_str():
+    return current_time.strftime("%H:%M")
 
-def find_next_time(time_list, current_time):
+current_time = datetime.now().time()"""
+
+def current_time():
+    return datetime.now().time()
+
+def current_time_str():
+    return current_time().strftime("%H:%M")
+
+
+def find_next_time(time_list):
     for time_str in time_list:
         time_obj = datetime.strptime(time_str, "%H:%M").time()
-        if time_obj > current_time:
+        if time_obj > current_time():
             return time_str
     return None
 
-def current_time_str():
-    return current_time.strftime("%H:%M")
-
-def find_previous_time(time_list, current_time):
+def find_previous_time(time_list):
     for time_str in reversed(time_list):
         time_obj = datetime.strptime(time_str, "%H:%M").time()
-        if time_obj < current_time:
+        if time_obj < current_time():
             return time_str
     return None
 
 def next_birae_time():
-    return find_next_time(birae, current_time)
+    return find_next_time(birae)
 
 def previous_birae_time():
-    return find_previous_time(birae, current_time)
+    return find_previous_time(birae)
 
 def next_panam_time():
-    return find_next_time(panam, current_time)
+    return find_next_time(panam)
 
 def previous_panam_time():
-    return find_previous_time(panam, current_time)
+    return find_previous_time(panam)
