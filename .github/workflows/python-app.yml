@@ -59,9 +59,12 @@ jobs:
         echo "${{  secrets.KUBE_CONFIG  }}" | base64 --decode > $HOME/.kube/config
 
     - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f Deployment.yaml
-        kubectl set image deployment/66-deployment 66-container=${{  secrets.DOCKERHUB_USERNAME  }}/66:latest
+      run: kubectl apply -f Deployment.yaml
+        # kubectl set image deployment/66-deployment 66-container=${{  secrets.DOCKERHUB_USERNAME  }}/66:latest
+
+      #set image 가 안되는거같음
+    - name: Force Restart Pods
+      run: kubectl rollout restart deployment/66-deployment
 
     
       
