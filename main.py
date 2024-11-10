@@ -23,12 +23,18 @@ async def root():
     }
     return JSONResponse(content=response_data, headers=headers, media_type="application/json; charset=utf-8")
 
-@app.get("/frombirae")
+@app.get("/nextbirea")
 async def from_birae():
-    result = next_birae_time()
-    return result
+    return next_birae_time()
 
-@app.get("/frompanam")
+@app.get("/nextpanam")
 async def from_panam():
-    result = next_panam_time()
-    return result
+    return next_panam_time()
+
+@app.get("/prebirae")
+async def pre_birae():
+    return previous_birae_time()
+
+@app.get("/prepanam")
+async def pre_panam():
+    return previous_panam_time()
