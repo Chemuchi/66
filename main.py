@@ -23,7 +23,7 @@ async def root():
     }
     return JSONResponse(content=response_data, headers=headers, media_type="application/json; charset=utf-8")
 
-@app.get("/nextbirea")
+@app.get("/nextbirae")
 async def from_birae():
     return next_birae_time()
 
