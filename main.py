@@ -38,3 +38,7 @@ async def pre_birae():
 @app.get("/prepanam")
 async def pre_panam():
     return previous_panam_time()
+
+@app.get("/current")
+async def current():
+    return current_time_str()
