@@ -1,5 +1,5 @@
 import requests
-from key import *
+from ..key import *
 from .XMLtoJSON import *
 
 '''
