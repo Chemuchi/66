@@ -1,4 +1,4 @@
-from .BusRouteInfo import *
+from openAPI.BusRouteInfo import *
 
 
 '''
@@ -6,7 +6,9 @@ DIR -
     0 : 비래동 종점 -> 판암역 종점
     1 : 판암역 종점 -> 비래동 종점
 '''
-
+"""url = f"http://openapitraffic.daejeon.go.kr/api/rest/busposinfo/getBusPosByRtid?busRouteId={routeId_66()}&serviceKey={servicekey()}"
+response = requests.get(url)
+print (response.text)"""
 
 def busPosInfo():
     url = f"http://openapitraffic.daejeon.go.kr/api/rest/busposinfo/getBusPosByRtid?busRouteId={routeId_66()}&serviceKey={servicekey()}"
@@ -15,33 +17,39 @@ def busPosInfo():
     return filtered_data
 
 
+
 # 노선 정보와 현재 위치 정보를 병합하는 함수
 def added_busPosInfo():
     # 66번 버스 노선 정보
     data_with_names = filterd_busRoute()
+    if data_with_names is None or "msgBody" not in data_with_names or "itemList" not in data_with_names["msgBody"]:
+        return {"error": "Failed to retrieve bus route information"}
 
     # 현재 버스 위치 정보
     data_to_update = busPosInfo()
+    if data_to_update is None or "msgBody" not in data_to_update or "itemList" not in data_to_update["msgBody"]:
+        return {"error": "Failed to retrieve bus position information"}
 
     # 첫 번째 JSON의 BUS_NODE_ID를 기준으로 BUSSTOP_NM과 TOTAL_DIST 매핑
     bus_stop_info_map = {}
     for item in data_with_names["msgBody"]["itemList"]:
-        bus_node_id = item["BUS_NODE_ID"]
-        total_dist = int(item["TOTAL_DIST"])
+        bus_node_id = item.get("BUS_NODE_ID")
+        total_dist = int(item.get("TOTAL_DIST", 0))  # 기본값 0 설정
 
-        if bus_node_id not in bus_stop_info_map:
-            bus_stop_info_map[bus_node_id] = {"BUSSTOP_NM": item["BUSSTOP_NM"], "TOTAL_DIST": total_dist}
-        else:
-            # DIR 조건에 따른 TOTAL_DIST 처리 (작은 거리, 큰 거리)
-            if total_dist < bus_stop_info_map[bus_node_id]["TOTAL_DIST"]:
-                bus_stop_info_map[bus_node_id]["DIR_0"] = total_dist
+        if bus_node_id:
+            if bus_node_id not in bus_stop_info_map:
+                bus_stop_info_map[bus_node_id] = {"BUSSTOP_NM": item.get("BUSSTOP_NM", ""), "TOTAL_DIST": total_dist}
             else:
-                bus_stop_info_map[bus_node_id]["DIR_1"] = total_dist
+                # DIR 조건에 따른 TOTAL_DIST 처리 (작은 거리, 큰 거리)
+                if total_dist < bus_stop_info_map[bus_node_id]["TOTAL_DIST"]:
+                    bus_stop_info_map[bus_node_id]["DIR_0"] = total_dist
+                else:
+                    bus_stop_info_map[bus_node_id]["DIR_1"] = total_dist
 
     # 두 번째 JSON 데이터에 BUSSTOP_NM과 TOTAL_DIST 추가
     for item in data_to_update["msgBody"]["itemList"]:
-        bus_node_id = item["BUS_NODE_ID"]
-        dir_value = item["DIR"]
+        bus_node_id = item.get("BUS_NODE_ID")
+        dir_value = item.get("DIR")
 
         if bus_node_id in bus_stop_info_map:
             item["BUSSTOP_NM"] = bus_stop_info_map[bus_node_id]["BUSSTOP_NM"]
@@ -54,6 +62,7 @@ def added_busPosInfo():
                 item["TOTAL_DIST"] = bus_stop_info_map[bus_node_id]["TOTAL_DIST"]
 
     return data_to_update
+
 
 
 # 함수 실행 및 결과 출력
