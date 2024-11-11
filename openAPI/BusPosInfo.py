@@ -1,4 +1,4 @@
-from BusRouteInfo import *
+from .BusRouteInfo import *
 
 
 '''
