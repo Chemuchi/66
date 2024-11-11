@@ -1,7 +1,6 @@
 import xml.etree.ElementTree as ET
 import requests
 from key import *
-from PrettyXML import prettyXML
 from XMLtoJSON import *
 import time
 
@@ -17,8 +16,14 @@ def filterd_busRoute():
     response = requests.get(url)
 
     # 필요한 키들만 필터링
-    filter_word = ["BUSSTOP_NM", "BUSSTOP_SEQ", "BUS_NODE_ID"]
+    filter_word = ["BUSSTOP_NM", "BUSSTOP_SEQ", "BUS_NODE_ID", "TOTAL_DIST"]
     filtered_json = filtering(response.content, filter_word)
+
+
     return filtered_json
+
+#print(json.dumps(filterd_busRoute(), ensure_ascii=False, indent=4))
+
+
 
 
