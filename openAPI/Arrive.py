@@ -1,10 +1,7 @@
-import requests
-from key import *
-from XMLtoJSON import *
 import json
 
-from openAPI.BusPosInfo import busPosInfo
-from openAPI.BusRouteInfo import filterd_busRoute
+from .BusPosInfo import busPosInfo
+from .BusRouteInfo import filterd_busRoute
 # 관심 정류장 이름 목록
 dir_0_stations_names = ["효촌마을아파트", "복합터미널", "동부네거리", "가양중학교입구", "한신휴플러스", "삼호아파트"]
 dir_1_stations_names = ["판암역", "판암동성당", "용운국제수영장", "복음아파트", "새울", "대전대학교", "대전대학교동문"]
