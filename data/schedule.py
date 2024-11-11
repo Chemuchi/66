@@ -19,7 +19,7 @@ def current_time():
     return datetime.now().time()
 
 def current_time_str():
-    return current_time().strftime("%H:%M")
+    return datetime.now().time().strftime("%H:%M")
 
 
 def find_next_time(time_list):
