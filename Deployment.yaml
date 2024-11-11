@@ -24,6 +24,8 @@ spec:
               secretKeyRef:
                 key: openapikey
                 name: 66secret
+          - name: PYTHONPATH
+            value: "/app"
         ports:
         - containerPort: 8000
         resources:
