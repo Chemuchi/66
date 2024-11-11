@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from data.schedule import *
 from collections import OrderedDict
+from openAPI.Arrive import *
 app = FastAPI()
 
 
@@ -38,3 +39,11 @@ async def pre_birae():
 @app.get("/prepanam")
 async def pre_panam():
     return previous_panam_time()
+
+@app.get("/fromhome")
+async def from_home():
+    return check_bus_position_dir_0()
+
+@app.get("/fromschool")
+async def from_school():
+    return check_bus_position_dir_1()
