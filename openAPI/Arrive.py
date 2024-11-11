@@ -35,10 +35,10 @@ def check_bus_position_dir_0():
 
         # DIR이 0일 때 관심 정류장에 해당하는 경우 메시지 출력
         if direction == "0" and bus_stop_name in dir_0_stations_names:
-            return json.dumps({"message": "슬슬 타러 나가죠?", "BUSSTOP_NM": bus_stop_name}, ensure_ascii=False, indent=4)
+            return {"message": "슬슬 타러 나가죠?", "BUSSTOP_NM": bus_stop_name}
 
     # 관심 정류장이 아닌 경우
-    return json.dumps({"message": "아직 전이거나 지나감", "BUSSTOP_NM": bus_stop_name}, ensure_ascii=False, indent=4)
+    return {"message": "아직 전이거나 지나감", "BUSSTOP_NM": bus_stop_name}
 
 # DIR 1 방향의 버스 위치를 확인하고 JSON 형식으로 반환하는 함수
 def check_bus_position_dir_1():
@@ -50,10 +50,10 @@ def check_bus_position_dir_1():
 
         # DIR이 1일 때 관심 정류장에 해당하는 경우 메시지 출력
         if direction == "1" and bus_stop_name in dir_1_stations_names:
-            return json.dumps({"message": "슬슬 타러 나가죠?", "BUSSTOP_NM": bus_stop_name}, ensure_ascii=False, indent=4)
+            return {"message": "슬슬 타러 나가죠?", "BUSSTOP_NM": bus_stop_name}
 
     # 관심 정류장이 아닌 경우
-    return json.dumps({"message": "아직 전이거나 지나침", "BUSSTOP_NM": bus_stop_name}, ensure_ascii=False, indent=4)
+    return {"message": "아직 전이거나 지나침", "BUSSTOP_NM": bus_stop_name}
 
 # API 호출 예시
 #print(check_bus_position_dir_0())
