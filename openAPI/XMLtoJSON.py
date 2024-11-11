@@ -22,13 +22,14 @@ filtering 사용예시 -
 
 '''
 
+# XML 데이터를 JSON으로 변환하는 함수
 def convert(xml_data):
     root = ET.fromstring(xml_data)
 
     def xml_to_dict(element):
         data = {}
         for child in element:
-            child_data = xml_to_dict(child) if len(child) else child.text
+            child_data = xml_to_dict(child) if len(child) else None  # 빈 요소는 None으로 처리
             if child.tag in data:
                 if isinstance(data[child.tag], list):
                     data[child.tag].append(child_data)
@@ -39,19 +40,20 @@ def convert(xml_data):
         return data
 
     result_dict = xml_to_dict(root)
-    return result_dict
 
+    # msgBody가 비어 있으면 운행 중인 버스가 없음을 메시지로 반환
+    if "msgBody" in result_dict and not result_dict["msgBody"]:
+        return {"message": "운행중인 버스가 없습니다."}
+
+    return result_dict
 
 # 특정 키만 남기는 필터링 함수
 def filtering(xml_data, filter_word):
-    # XML 데이터를 JSON으로 변환
     json_data = convert(xml_data)
 
-    # JSON 데이터에서 특정 키만 필터링
     def filter_dict(data):
         if isinstance(data, dict):
-            return {key: filter_dict(value) for key, value in data.items() if
-                    key in filter_word or isinstance(value, (dict, list))}
+            return {key: filter_dict(value) for key, value in data.items() if key in filter_word or isinstance(value, (dict, list))}
         elif isinstance(data, list):
             return [filter_dict(item) for item in data if isinstance(item, dict)]
         else:

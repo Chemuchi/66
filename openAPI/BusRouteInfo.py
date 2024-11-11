@@ -1,6 +1,8 @@
+import json
+
 import requests
 from key import *
-from .XMLtoJSON import *
+from openAPI.XMLtoJSON import *
 
 '''
 66번이 거쳐가는 정류장을 순서대로 출력
