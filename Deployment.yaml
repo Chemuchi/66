@@ -24,14 +24,12 @@ spec:
               secretKeyRef:
                 key: openapikey
                 name: 66secret
-          - name: PYTHONPATH
-            value: "/app"
         ports:
         - containerPort: 8000
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "200m"
+            memory: "256Mi"
+            cpu: "500m"
           requests:
-            memory: "64Mi"
-            cpu: "100m"
+            memory: "256Mi"
+            cpu: "500m"
