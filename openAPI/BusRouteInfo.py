@@ -1,6 +1,8 @@
+import xml.etree.ElementTree as ET
 import requests
 from key import *
-from .XMLtoJSON import *
+from XMLtoJSON import *
+import time
 
 '''
 66번이 거쳐가는 정류장을 순서대로 출력

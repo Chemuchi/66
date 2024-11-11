@@ -51,7 +51,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # 추후에 공공데이터 openAPI 사용하면 Secret.yaml도 추가해야댐~~
+    # 추후에 공공데이터 OpenAPI 사용하면 Secret.yaml도 추가해야댐~~
 
     - name: Setup Kubernetes
       run: |
