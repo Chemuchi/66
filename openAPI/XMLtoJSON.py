@@ -10,10 +10,16 @@ response = requests.get(url)
 
 convert 사용예시 - 
     convert(response.content)
+    
+출력시 - 
+    print(json.dumps(convert(response.content), indent=4, ensure_ascii=False))
 
 filtering 사용예시 -
     filter_word = ["A", "B", "C"]
     filtering(response.content, filter_word)
+
+출력시 - 
+    print(json.dumps(filtering(response.content, filter_word), indent=4, ensure_ascii=False))
 
 '''
 
@@ -53,5 +59,5 @@ def filtering(xml_data, filter_word):
             return data
 
     filtered_data = filter_dict(json_data)
-    return json.dumps(filtered_data, ensure_ascii=False, indent=4)
+    return filtered_data
 
