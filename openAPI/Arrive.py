@@ -11,6 +11,11 @@ def added_busPosInfo():
     data_with_names = filterd_busRoute()  # BUSSTOP_NM, BUSSTOP_SEQ, BUS_NODE_ID, TOTAL_DIST 포함된 정류장 정보
     data_to_update = busPosInfo()         # 현재 버스 위치 정보
 
+    #운행중인 버스 없을때의 예외처리
+    #테스트 필요함
+    if not data_to_update or "msgBody" not in data_to_update or "itemList" not in data_to_update["msgBody"]:
+        return {"message": "운행중인 버스가 없습니다."}
+
     # 정류장 정보를 매핑하여 이름을 추가
     bus_stop_name_map = {item["BUS_NODE_ID"]: item for item in data_with_names["msgBody"]["itemList"]}
 
