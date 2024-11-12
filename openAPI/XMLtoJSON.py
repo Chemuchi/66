@@ -29,7 +29,8 @@ def convert(xml_data):
     def xml_to_dict(element):
         data = {}
         for child in element:
-            child_data = xml_to_dict(child) if len(child) else None  # 빈 요소는 None으로 처리
+            # 빈 요소가 아닌 경우, child.text를 추출하고 공백을 제거
+            child_data = xml_to_dict(child) if len(child) else (child.text.strip() if child.text else "")
             if child.tag in data:
                 if isinstance(data[child.tag], list):
                     data[child.tag].append(child_data)
@@ -40,6 +41,7 @@ def convert(xml_data):
         return data
 
     result_dict = xml_to_dict(root)
+    return result_dict
 
     # msgBody가 비어 있으면 운행 중인 버스가 없음을 메시지로 반환
     if "msgBody" in result_dict and not result_dict["msgBody"]:

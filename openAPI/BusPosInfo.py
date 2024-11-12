@@ -34,7 +34,7 @@ def added_busPosInfo():
     bus_stop_info_map = {}
     for item in data_with_names["msgBody"]["itemList"]:
         bus_node_id = item.get("BUS_NODE_ID")
-        total_dist = int(item.get("TOTAL_DIST", 0))  # 기본값 0 설정
+        total_dist = int(item.get("TOTAL_DIST", 0) or 0)  # 기본값 0 설정
 
         if bus_node_id:
             if bus_node_id not in bus_stop_info_map:

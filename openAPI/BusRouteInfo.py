@@ -10,6 +10,10 @@ from openAPI.XMLtoJSON import *
 
 필터링 단어는 필요시 추가
 '''
+url = f"http://openapitraffic.daejeon.go.kr/api/rest/busRouteInfo/getStaionByRoute?busRouteId={routeId_66()}&serviceKey={servicekey()}"
+response = requests.get(url)
+#print(response.text)
+
 
 def filterd_busRoute():
     url = f"http://openapitraffic.daejeon.go.kr/api/rest/busRouteInfo/getStaionByRoute?busRouteId={routeId_66()}&serviceKey={servicekey()}"
@@ -23,6 +27,7 @@ def filterd_busRoute():
     return filtered_json
 
 #print(json.dumps(filterd_busRoute(), ensure_ascii=False, indent=4))
+#print(convert(response.content))
 
 
 
