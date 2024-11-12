@@ -10,7 +10,8 @@ DIR -
 response = requests.get(url)
 print (response.text)"""
 
-def busPosInfo():
+# API 접근이 불가능해 컨테이너가 실행안됨
+"""def busPosInfo():
     url = f"http://openapitraffic.daejeon.go.kr/api/rest/busposinfo/getBusPosByRtid?busRouteId={routeId_66()}&serviceKey={servicekey()}"
     response = requests.get(url)
     filtered_data = filtering(response.content, ["BUS_NODE_ID","DIR"])
@@ -66,7 +67,7 @@ def added_busPosInfo():
 
 
 # 함수 실행 및 결과 출력
-updated_data = added_busPosInfo()
+updated_data = added_busPosInfo()"""
 
 # 최종 결과 출력
 #print(json.dumps(updated_data, ensure_ascii=False, indent=4))

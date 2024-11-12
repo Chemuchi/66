@@ -1,7 +1,10 @@
 import json
 
-from openAPI.BusPosInfo import busPosInfo
-from openAPI.BusRouteInfo import filterd_busRoute
+#from openAPI.BusPosInfo import busPosInfo
+#from openAPI.BusRouteInfo import filterd_busRoute
+
+# API 접근이 불가능해 컨테이너가 실행안됨
+"""
 # 관심 정류장 이름 목록
 dir_0_stations_names = ["효촌마을아파트", "복합터미널", "동부네거리", "가양중학교입구", "한신휴플러스", "삼호아파트"]
 dir_1_stations_names = ["판암역", "판암동성당", "용운국제수영장", "복음아파트", "새울", "대전대학교", "대전대학교동문"]
@@ -60,7 +63,7 @@ def check_bus_position_dir_1():
         if direction == "1" and bus_stop_name in dir_1_stations_names:
             return {"message": "슬슬 타러 나가죠?", "BUSSTOP_NM": bus_stop_name}
 
-    return {"message": "아직 전이거나 지나침", "BUSSTOP_NM": bus_stop_name}
+    return {"message": "아직 전이거나 지나침", "BUSSTOP_NM": bus_stop_name}"""
 
 # API 호출 예시
 #print(check_bus_position_dir_0())
