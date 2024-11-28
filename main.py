@@ -27,10 +27,17 @@ async def root():
 @app.get("/nextbirae")
 async def from_birae():
     return next_birae_time()
+@app.get("/secondnextbirae")
+async def second_from_birae():
+    return second_next_birae_time()
 
 @app.get("/nextpanam")
 async def from_panam():
     return next_panam_time()
+
+@app.get("/secondnextpanam")
+async def second_from_panam():
+    return second_next_panam_time()
 
 @app.get("/prebirae")
 async def pre_birae():

@@ -29,6 +29,16 @@ def find_next_time(time_list):
             return time_str
     return None
 
+def find_second_next_time(time_list):
+    count = 0
+    for time_str in time_list:
+        time_obj = datetime.strptime(time_str, "%H:%M").time()
+        if time_obj > current_time():
+            count += 1
+            if count == 2:
+                return time_str
+    return None
+
 def find_previous_time(time_list):
     for time_str in reversed(time_list):
         time_obj = datetime.strptime(time_str, "%H:%M").time()
@@ -39,10 +49,16 @@ def find_previous_time(time_list):
 def next_birae_time():
     return find_next_time(birae)
 
+def second_next_birae_time():
+    return find_second_next_time(birae)
+
 def previous_birae_time():
     return find_previous_time(birae)
 
 def next_panam_time():
+    return find_next_time(panam)
+
+def second_next_panam_time():
     return find_next_time(panam)
 
 def previous_panam_time():
